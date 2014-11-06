@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/pages/protected/layout/html5.xhtml">
+<ui:define name="content"> 
+
+	<br />
+	
+	<div class="row">
+		<div class="col-md-6">
+		
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h:form role="form" styleClass="form-horizontal">
+						<h:commandButton styleClass="btn btn-default" action="#{loginMB.retornarAoIndex()}" value="Entrar como cliente" />
+					</h:form>
+				</div>
+			</div>
+		
+		</div>
+		<div class="col-md-6">
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+		
+					<h:form role="form" styleClass="form-horizontal">
+						
+						<h:dataTable styleClass="table table-hover" value="#{loginMB.usuario.usuarioLojas}" var="ul">
+							<h:column>
+    							<f:facet name="header">Id</f:facet>
+    							#{ul.loja.id}
+    						</h:column>
+							<h:column>
+    							<f:facet name="header">Nome</f:facet>
+    							#{ul.loja.nomeFantasia}
+    						</h:column>
+							<h:column>
+    							<f:facet name="header"></f:facet>
+    							<h:commandButton styleClass="btn btn-default" action="#{loginMB.escolherPerfilLogin(ul.loja)}"  value="Escolher">
+    								<f:setPropertyActionListener target="#{loginMB.lojaEscolhida}" value="#{loja}" />
+    							</h:commandButton>
+    						</h:column>
+						</h:dataTable>
+						
+					</h:form>
+		
+				</div>
+			</div>
+	
+		</div>
+	</div>
+	
+	</ui:define>
+</ui:composition>
+
+</html>

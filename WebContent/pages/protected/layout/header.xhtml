@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fc="http://java.sun.com/jsf/composite/diariocomponente">
+
+<ui:composition>
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Diario</a>
+	</div>
+	<div class="navbar-collapse collapse">
+		<h:form style="border:0px; margin:0px;" styleClass="">
+			<ul class="nav navbar-nav">
+				<li class="active"><h:commandLink action="/index.xhtml">Home</h:commandLink></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</h:form>
+		
+		<h:form role="form" styleClass="navbar-form" rendered="#{!controleAcesso.usuarioLogado}">
+		<!-- Deslogado -->
+			<div class="form-group col-md-3">
+			
+				<fc:selectEmailCpfCnpj pessoa="#{loginMB.usuario.pessoa}" identificador="idLogin" />
+												
+			</div>
+			<div class="form-group">
+				<h:inputSecret pt:required="true" value="#{loginMB.usuario.senha}" id="senha" pt:placeholder="Senha" styleClass="form-control" />
+			</div>
+			&nbsp;
+			<h:commandButton type="submit" styleClass="btn btn-success" value="Entrar" action="#{loginMB.loginUsuario()}" />
+			&nbsp;
+			<h:commandLink styleClass="btn btn-default" action="pessoaCadastroPublico" immediate="true">Cadastrar</h:commandLink>
+		</h:form>	
+		
+		<h:form styleClass="navbar-form navbar-right" style="border:0px; margin:0px;" rendered="#{controleAcesso.usuarioLogado}">
+		<!-- Logado -->
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#about">
+						<h:outputText value="#{controleAcesso.usuario.pessoa.nome}" /> 
+						 <h:outputText value=" ( #{controleAcesso.loja.nomeFantasia} )" rendered="#{controleAcesso.loja != null}" />
+					</a>
+						
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Opções <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+					
+						<li class="dropdown-header">Opções Loja</li>
+						<li><h:commandLink action="fornecerPontos" immediate="true">Fornecer pontos</h:commandLink></li>
+						<li><h:commandLink action="listarMinhasLojas" immediate="true">Minhas lojas</h:commandLink></li>
+					
+						<li class="divider"></li>
+						
+						<li class="dropdown-header">Extratos Cliente</li>
+						<li><h:commandLink action="extratoPontos" immediate="true">Extrato de Pontos</h:commandLink></li>
+
+						<li class="divider"></li>
+
+						<li class="dropdown-header">Opções Admin</li>
+						<li><h:commandLink action="gerenciarLojas" immediate="true">Gerenciar lojas</h:commandLink></li>
+						<li><h:commandLink action="cadastrarLoja" immediate="true">Cadastrar loja</h:commandLink></li>
+						<li><h:commandLink action="listarLojas" immediate="true">Listar lojas</h:commandLink></li>
+						<li><h:commandLink action="cadastrarCampanha" immediate="true">Cadastrar Campanha</h:commandLink></li>
+							
+						<li class="divider"></li>
+						<li><h:commandLink value="Sair" action="#{loginMB.logOut()}" /></li>
+						
+					</ul></li>
+			</ul>
+		</h:form>		
+		
+	</div>
+	<!--/.navbar-collapse -->
+
+</ui:composition>
+
+</html>

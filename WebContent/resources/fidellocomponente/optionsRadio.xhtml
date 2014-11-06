@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+ <cc:interface>
+ 	 <cc:attribute name="list" required="true" />
+     <cc:attribute name="value" required="true" />
+     <cc:attribute name="name" required="true" />
+ </cc:interface>
+
+ <cc:implementation>
+     
+    	<ui:repeat value="#{cc.attrs.list}" var="opt">
+			<div class="radio-inline">
+				<label>
+	            	<input type="radio" 
+		    			name="#{cc.attrs.name}" 
+		    			id="optionsRadios#{cc.attrs.name}#{opt.codigo}" 
+		    			value="#{opt.codigo}"
+		    			checked="${cc.attrs.value == opt.codigo ? 'checked' : ''}"
+		    			onchange="alterarRadio#{cc.attrs.identificador}(); "
+	    			/>
+	    			#{opt.texto}
+				</label>
+			</div>
+		</ui:repeat>
+		<span style="display: none;" id="optionsRadiosValue#{cc.attrs.name}#{opt.codigo}">
+			<h:inputHidden value="#{cc.attrs.value}" />
+		</span>
+		
+		<script>
+		/*<![CDATA[*/
+		         
+			function alterarRadio#{cc.attrs.identificador}(){
+	
+				var optSelected = $('input[name=#{cc.attrs.name}]:checked').val();
+				
+				$( "#optionsRadiosValue#{cc.attrs.name}#{opt.codigo}" ).find( "input[type='hidden']" ).not( "script" ).val(optSelected);
+				
+			}
+		      	
+		/*]]>*/
+		</script>
+ </cc:implementation>
+</html>

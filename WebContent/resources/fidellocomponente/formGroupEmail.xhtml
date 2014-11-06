@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:cc="http://java.sun.com/jsf/composite"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fc="http://java.sun.com/jsf/composite/diariocomponente"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+ <cc:interface>
+ 	 <cc:attribute name="emails" required="true" />
+ 	 <cc:attribute name="labelSpan" required="true" />
+ 	 <cc:attribute name="campoSpan" required="true" />
+     <cc:attribute name="id" required="false" />
+     <cc:attribute name="styleClass" required="false" />
+ </cc:interface>
+
+ <cc:implementation>
+     
+	<ui:repeat value="#{cc.attrs.emails}" var="tip" varStatus="loop">
+		<fc:formGroup>
+			<fc:label para="email#{cc.attrs.id}" span="#{cc.attrs.labelSpan}">E-mail</fc:label>
+			<fc:campo span="#{cc.attrs.campoSpan}">
+				<fc:inputEmail id="#{cc.attrs.id}" email="#{cc.attrs.emails[loop.index]}" styleClass="#{cc.attrs.styleClass}" />
+			</fc:campo>
+		</fc:formGroup>
+	</ui:repeat>
+     
+ </cc:implementation>
+</html>

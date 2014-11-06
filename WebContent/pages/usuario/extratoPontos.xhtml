@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fc="http://java.sun.com/jsf/composite/diariocomponente">
+
+<ui:composition template="/pages/protected/layout/html5.xhtml">
+<ui:define name="content"> 
+
+	<br />
+	
+	<div class="row">
+		<div class="col-md-9">
+
+			<div class="panel panel-default">
+			
+				<div class="panel-heading">Extrato Cliente</div>
+
+				<div class="panel-body">
+
+					<h:form role="form" styleClass="form-horizontal">			
+						<div class="panel-body">
+			                <div class='input-append date' id='datepicker1'>
+			                	<div class="col-sm-4">
+									<label for="dataInicio" class="col-md-2 control-label">
+				                		Data Inicio
+									</label>
+			                    	<input type="text" class="datepicker date" value="#{extratoPontosMB.dataInicio}" id="dataInicio" size="10"/>
+			                	</div>
+			                	<div class="col-sm-4">
+									<label for="dataInicio" class="col-md-2 control-label">
+				                		Data Fim
+									</label>
+			                    	<input type="text" value="#{extratoPontosMB.dataFim}" id="dataInicio" size="10" />
+								</div>
+								<div class="col-sm-4">
+									<h:commandButton styleClass="btn btn-primary" id="ExtratoPontos" action="#{extratoPontosMB.pesquisar}" value="Pesquisar" />
+								</div>
+							</div>
+							<h:dataTable styleClass="table table-hover" value="#{extratoPontosMB.pontos}" var="pontos" >
+								<h:column>
+	    							<f:facet name="header">Data</f:facet>
+	    							#{pontos.data}
+	    						</h:column>
+								<h:column>
+	    							<f:facet name="header">Loja</f:facet>
+	    							#{pontos.loja.nomeFantasia}
+	    						</h:column>
+								<h:column>
+	    							<f:facet name="header">Pontos</f:facet>
+	    							#{pontos.pontos}
+	    						</h:column>
+							</h:dataTable>
+						</div>
+					</h:form>
+				</div>
+			</div>
+			
+			<script type="text/javascript">
+				$(function(){
+				 var options = new Array();
+				 options['language'] = 'pt-BR';
+				 options['format'] = 'dd/mm/yyyy';
+				 $('.datepicker').datepicker(options);
+				})
+			</script>
+		</div>
+	</div>
+
+</ui:define>
+</ui:composition>
+
+</html>
+

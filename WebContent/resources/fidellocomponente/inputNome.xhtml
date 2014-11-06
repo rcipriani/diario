@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:cc="http://java.sun.com/jsf/composite"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+ <cc:interface>
+ 	 <cc:attribute name="value" required="true" />
+     <cc:attribute name="id" required="false" />
+     <cc:attribute name="styleClass" required="false" />
+	 <cc:attribute name="required" required="false" default="false" />
+ </cc:interface>
+
+ <cc:implementation>
+     
+	<h:inputText pt:required="#{cc.attrs.required}" value="#{cc.attrs.value}" id="#{cc.attrs.id}" pt:placeholder="Digite seu nome" styleClass="form-control #{cc.attrs.styleClass}" />
+	 
+ </cc:implementation>
+</html>
