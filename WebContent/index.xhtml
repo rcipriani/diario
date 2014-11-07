@@ -7,9 +7,77 @@
 
 <ui:composition template="/pages/protected/layout/html5.xhtml">
 
-<ui:define name="jumbotron"> 
-	
-	<div class="jumbotron">
+<ui:define name="jumbotron">
+
+<script>
+	/*<![CDATA[*/
+	         
+	function createXHR() {
+	    var request = false;
+	    try {
+	        request = new ActiveXObject('Msxml2.XMLHTTP');
+	    } catch (err2) {
+	        try {
+	            request = new ActiveXObject('Microsoft.XMLHTTP');
+	        } catch (err3) {
+	            try {
+	                request = new XMLHttpRequest();
+	            } catch (err1) {
+	                request = false;
+	            }
+	        }
+	    }
+	    return request;
+	}
+	 
+	function loadJSON(fname) {
+	    var xhr = createXHR();
+	    xhr.open("GET", fname, true);
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState == 4) {
+	            if (xhr.status != 404) {
+	                var data = eval("(" + xhr.responseText + ")");
+	                
+	                
+	                document.getElementById("zone").innerHTML = "<h2>Testes:</h2>";
+	                
+	                var testes = data.listing.testes;
+	                
+	                testes.forEach(function(valor, chave){
+	                    console.log(chave, valor);
+	                    document.getElementById("zone").innerHTML += valor.nome + " | " + valor.email + " | " + valor.idade + " | " + valor.gostaDeCerveja + " | " + " <br />";
+	                });
+	                
+	            } else {
+	                document.getElementById("zone").innerHTML = fname + " not found";
+	            }
+	        }
+	    }
+	    xhr.send(null);
+	}
+	      	
+/*]]>*/
+</script>
+
+
+
+
+		<p>
+			<font size="+3">Ajax JSON/JAXB Demo</font>
+		</p>
+		<hr />
+		<form name="ajax" method="POST" action="">
+
+			<p>
+				<a href="javascript:" onclick="loadJSON('s/tutorial/testes');">Click
+					to load the JSON file </a>
+			</p>
+
+		</form>
+
+		<div id="zone"></div>
+
+		<div class="jumbotron">
 		<div class="container">
 		
 		<h1>Hello, world!</h1>
