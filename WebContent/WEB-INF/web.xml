@@ -17,7 +17,43 @@
     <param-name>primefaces.THEME</param-name>
     <param-value>bootstrap</param-value>
   </context-param>
+  
+  <!-- Resteasy -->
+ <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+ 
+    <servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>teste.HelloWorldApplication</param-value>
+        </init-param>
+ 
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>Resteasy</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    
+    <context-param>
+      <param-name>resteasy.scan</param-name>
+      <param-value>true</param-value>
+   </context-param>
+   <context-param>
+      <param-name>resteasy.servlet.mapping.prefix</param-name>
+      <param-value>/</param-value>
+   </context-param>
+ 
+    <!-- Weld -->
   <listener>
     <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
   </listener>
+  
 </web-app>
