@@ -1,10 +1,13 @@
-package teste;
+package br.com.diario.rest;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.ws.rs.core.Application;
  
-import teste.HelloWorld;
+
+
+import br.com.diario.rest.HelloWorld;
  
 public class HelloWorldApplication extends Application
 {

@@ -12,71 +12,88 @@
 <script>
 	/*<![CDATA[*/
 	         
-	function createXHR() {
-	    var request = false;
-	    try {
-	        request = new ActiveXObject('Msxml2.XMLHTTP');
-	    } catch (err2) {
-	        try {
-	            request = new ActiveXObject('Microsoft.XMLHTTP');
-	        } catch (err3) {
-	            try {
-	                request = new XMLHttpRequest();
-	            } catch (err1) {
-	                request = false;
-	            }
-	        }
-	    }
-	    return request;
-	}
-	 
-	function loadJSON(fname) {
-	    var xhr = createXHR();
-	    xhr.open("GET", fname, true);
-	    xhr.onreadystatechange = function() {
-	        if (xhr.readyState == 4) {
-	            if (xhr.status != 404) {
-	                var data = eval("(" + xhr.responseText + ")");
-	                
-	                
-	                document.getElementById("zone").innerHTML = "<h2>Testes:</h2>";
-	                
-	                var testes = data.listing.testes;
-	                
-	                testes.forEach(function(valor, chave){
-	                    console.log(chave, valor);
-	                    document.getElementById("zone").innerHTML += valor.nome + " | " + valor.email + " | " + valor.idade + " | " + valor.gostaDeCerveja + " | " + " <br />";
-	                });
-	                
-	            } else {
-	                document.getElementById("zone").innerHTML = fname + " not found";
-	            }
-	        }
-	    }
-	    xhr.send(null);
-	}
-	      	
+	var demoApp = angular.module('demoApp', []);
+	
+	var SimpleController = (function SimpleController($scope) {
+        
+        $scope.lista = [
+                       	{nome: "eu", email: "fdsa@", idade: 32, gostaDeCerveja: true}
+                        ];
+        
+		$scope.teste = function (url){
+			
+			var xhr = $scope.createXHR();
+		    xhr.open("GET", url, true);
+		   
+		    xhr.onreadystatechange = function() {
+		        if (xhr.readyState == 4) {
+		            if (xhr.status != 404) {
+		                var data = eval("(" + xhr.responseText + ")");
+		                
+		                $scope.lista = data.listing.testes;
+		                $scope.$digest();
+		                
+		            } else {
+		                document.getElementById("zone").innerHTML = fname + " not found";
+		            }
+		        }
+		    }
+		    xhr.send(null);
+			
+		}
+		
+		$scope.createXHR = function (){
+		    var request = false;
+		    try {
+		        request = new ActiveXObject('Msxml2.XMLHTTP');
+		    } catch (err2) {
+		        try {
+		            request = new ActiveXObject('Microsoft.XMLHTTP');
+		        } catch (err3) {
+		            try {
+		                request = new XMLHttpRequest();
+		            } catch (err1) {
+		                request = false;
+		            }
+		        }
+		    }
+		    return request;
+		}
+    })
+	
+	
+     demoApp.controller('SimpleController', SimpleController);
+
+
 /*]]>*/
 </script>
+ <div data-ng-controller="SimpleController">
 
-
-
-
-		<p>
-			<font size="+3">Ajax JSON/JAXB Demo</font>
-		</p>
-		<hr />
 		<form name="ajax" method="POST" action="">
 
 			<p>
-				<a href="javascript:" onclick="loadJSON('s/tutorial/testes');">Click
-					to load the JSON file </a>
+				<a href="javascript:" data-ng-click="teste('s/tutorial/testes')">teste </a>
 			</p>
 
 		</form>
 
 		<div id="zone"></div>
-
+		
+		<table>
+			<tr>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Idade</th>
+				<th>Cervejeiro</th>
+			</tr>
+			<tr data-ng-repeat="teste in lista">
+				<td>{{teste.nome}}</td>
+				<td>{{teste.email}}</td>
+				<td>{{teste.idade}}</td>
+				<td>{{teste.gostaDeCerveja}}</td>
+			</tr>
+		</table>
+</div>
 		<div class="jumbotron">
 		<div class="container">
 		

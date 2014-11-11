@@ -1,4 +1,4 @@
-package teste;
+package br.com.diario.rest;
 
 import java.util.List;
 

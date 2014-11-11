@@ -1,4 +1,4 @@
-package teste;
+package br.com.diario.rest;
 
 
 public class Teste {
