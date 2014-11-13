@@ -33,9 +33,9 @@ public class HelloWorld
 
 		ArrayList<Teste> list = new ArrayList<Teste>();
 
-		list.add(new Teste("Rodrigo", "eu@teste.com", 29, true));
-		list.add(new Teste("Rodrigo1", "eu1@teste.com", 291, false));
-		list.add(new Teste("Rodrigo2", "eu2@teste.com", 292, true));
+		list.add(new Teste("Rodrigó", "eu@teste.com", 29, true));
+		list.add(new Teste("Mução", "eu1@teste.com", 291, false));
+		list.add(new Teste("fiófó", "eu2@teste.com", 292, true));
 
 		return new TesteList(list);
 	}
