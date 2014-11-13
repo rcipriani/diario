@@ -7,14 +7,15 @@ app.config(['$routeProvider', function ($routeProvider) {
 	// Home
 	.when("/", {templateUrl: "pages/evento/evento.html", controller: "PageCtrl"}) 
 	// Pages
-//	.when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"}) 
-//	.when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"}) 
-	/* etc… routes to other pages… */ 
+	.when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"}) 
+	.when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"}) 
+	/* etcï¿½ routes to other pagesï¿½ */ 
 	// Blog
-//	.when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"}) 
-//	.when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"}) 
+	.when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"}) 
+	.when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"}) 
 	// else 404
-	.otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"}); 
+	.when("/404", {templateUrl: "partials/erro404.html", controller: "BlogCtrl"}) 
+	.otherwise("/404", {templateUrl: "partials/erro404.html", controller: "PageCtrl"}); 
 }]);
 
 /** * Controls the Blog */ 
