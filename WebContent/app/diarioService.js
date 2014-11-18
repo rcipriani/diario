@@ -4,18 +4,21 @@ diarioApp.factory('diarioService', function($http) {
 	console.log("Diário service requisitado."); 
 	
 	return {
-        buscarLista: function(url) {
+        buscarLista: function() {
             return $http({
            	 	method: "get"
-       	 		, url: url
+       	 		, url: "s/eventoservice/listar"
             });
         }
-		,gravarEvento: function(url) {
+		,gravarEvento: function(evento) {
+			console.log(evento);
+			var teste = "testes";
 	        return $http({
-	       	 method: "get"
-	   		 , url: "s/"
-        });
-   }
+	        	method: "get"
+	        	, url: "s/eventoservice/gravar"
+        		, params: {'evento': teste}
+	        });
+		}
 	}
 	
 });

@@ -3,20 +3,27 @@ diarioApp.controller('diarioController', function ($scope, diarioService /*, $lo
 	
 	console.log("Diário controller requisitado."); 
 	
-	 $scope.lista = [
-                    	{nome: "eu", email: "fdsa@", idade: 32, gostaDeCerveja: true}
-                     ];
+	 $scope.eventos = [
+                    	{id: 0, nome: "testeInicializador"}
+                     ]
+	 , evento = "";
 	 
-	 $scope.teste = function (url){
+	 $scope.listar = function (){
 			
-	 	diarioService.buscarLista(url).success(function (data){
-	 		
-	 		$scope.lista = data.listing.testes;
+	 	diarioService.buscarLista().success(function (data){
+	 		console.log(data);
+	 		$scope.eventos = data.eventos.lista;
 	 		
  		});
 			
 	}
 	 
+	 $scope.gravar = function (evento){
+	 	diarioService.gravarEvento(evento)
+	 	.success(function (data){
+	 		console.log(data);
+	 	});
+	}
 	 
 	 
 	 

@@ -1,10 +1,16 @@
 <div>
 
-	<input type="text" data-ng-model="evento" /> {{evento}}
+	<form data-ng-submit="gravar(evento)">
+		
+		Evento: <input type="text" data-ng-model="evento" name="text" />
+		
+		<input type="submit" id="submit" value="Submit" />
+		
+	</form>
 
 	<form name="ajax" method="POST" action="">
 		<p>
-			<a href="javascript:" data-ng-click="teste('s/tutorial/testes')">teste </a>
+			<a href="javascript:" data-ng-click="listar()"> Listar </a>
 		</p>
 	</form>
 
@@ -14,14 +20,10 @@
 		<tr>
 			<th>Nome</th>
 			<th>Email</th>
-			<th>Idade</th>
-			<th>Cervejeiro</th>
 		</tr>
-		<tr data-ng-repeat="teste in lista">
-			<td>{{teste.nome}}</td>
-			<td>{{teste.email}}</td>
-			<td>{{teste.idade}}</td>
-			<td>{{teste.gostaDeCerveja}}</td>
+		<tr data-ng-repeat="evento in eventos">
+			<td>{{evento.id}}</td>
+			<td>{{evento.nome}}</td>
 		</tr>
 	</table>
 	
