@@ -1,6 +1,6 @@
  var eventoFactory = angular.module('eventoFactory', []);
  
- eventoFactory.factory('eventoFactory', function($http) {
+ eventoFactory.factory('eventoFactory', ['$http', function($http) {
 	
 	return {
         buscarLista: function() {
@@ -20,4 +20,4 @@
 		}
 	};
 	
-});
+}]);

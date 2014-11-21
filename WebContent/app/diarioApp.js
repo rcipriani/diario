@@ -1,7 +1,9 @@
 var diarioApp = angular.module('diarioApp', [ 
 	'ngRoute',
+	'pageController',
 	'diarioController',
-	'eventoController'
+	'eventoController',
+	'diarioDirectives'
 ]);
 
 diarioApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) { 
@@ -14,8 +16,8 @@ diarioApp.config(['$routeProvider', '$locationProvider', function ($routeProvide
 	.when("/eventospainel", {templateUrl: "pages/evento/eventospainel.html", controller: "eventoController"})
 	
 	// Pages
-	.when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"}) 
-	.when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"}) 
+	.when("/about", {templateUrl: "partials/about.html", controller: "pageController"}) 
+	.when("/faq", {templateUrl: "partials/faq.html", controller: "pageController"}) 
 	
 	// else 404
 	.when("/404", {templateUrl: "partials/erro404.html", controller: 'diarioController'}) 
