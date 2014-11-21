@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.Mapped;
 
-@Path("s/eventoservice")
+@Path("s/evento/service")
 public class EventoService {
 
 //    @GET

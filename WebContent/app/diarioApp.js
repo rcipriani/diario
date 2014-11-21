@@ -1,28 +1,26 @@
 var diarioApp = angular.module('diarioApp', [ 
-	'ngRoute' 
+	'ngRoute',
+	'diarioController',
+	'eventoController'
 ]);
 
-diarioApp.config(['$routeProvider', function ($routeProvider) { 
+diarioApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) { 
 	
 	$routeProvider 
 	
 	// Home
-	.when("/", {templateUrl: "pages/evento/evento.html", controller: "diarioController"}) 
+	.when("/", {redirectTo: "/eventospainel"})
 	
-	// Diario
-//	.when("/evento", {templateUrl: "pages/evento/evento.html", controller: "PageCtrl"}) 
+	.when("/eventospainel", {templateUrl: "pages/evento/eventospainel.html", controller: "eventoController"})
 	
 	// Pages
 	.when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"}) 
 	.when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"}) 
-	/* etc� routes to other pages� */ 
-	
-	// Blog
-	.when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"}) 
-	.when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"}) 
 	
 	// else 404
-	.when("/404", {templateUrl: "partials/erro404.html", controller: "BlogCtrl"}) 
-	.otherwise("/404", {templateUrl: "partials/erro404.html", controller: "PageCtrl"});
+	.when("/404", {templateUrl: "partials/erro404.html", controller: 'diarioController'}) 
+	.otherwise("/404", {redirectTo: "/404"});
+	
+	$locationProvider.html5Mode(false).hashPrefix('!');	
 	
 }]);

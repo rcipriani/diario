@@ -1,13 +1,12 @@
+ var eventoFactory = angular.module('eventoFactory', []);
  
-diarioApp.factory('diarioService', function($http) {
-	
-	console.log("Diário service requisitado."); 
+ eventoFactory.factory('eventoFactory', function($http) {
 	
 	return {
         buscarLista: function() {
             return $http({
            	 	method: "get"
-       	 		, url: "s/eventoservice/listar"
+       	 		, url: "s/evento/service/listar"
             });
         }
 		,gravarEvento: function(evento) {
@@ -15,10 +14,10 @@ diarioApp.factory('diarioService', function($http) {
 			var teste = "testes";
 	        return $http({
 	        	method: "get"
-	        	, url: "s/eventoservice/gravar"
+	        	, url: "s/evento/service/gravar"
         		, params: {'evento': teste}
 	        });
 		}
-	}
+	};
 	
 });
