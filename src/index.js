@@ -7,7 +7,7 @@ ReactDOM.render(
     <div>
         <input defaultValue="oi"/>
         <div>Teste 1</div>
-        <div>Teste 3</div>
+        <div>Teste 2</div>
     </div>,
     document.getElementById('root')
 );

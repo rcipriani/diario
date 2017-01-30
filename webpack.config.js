@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+var loaders = require('./webpack.loaders.js');
+
 const sourcePath = path.join(__dirname, './src');
 const staticsPath = path.join(__dirname, './dist');
 
@@ -62,33 +64,7 @@ module.exports = function (env) {
             filename: '[name].bundle.js',
         },
         module: {
-            rules: [
-                {
-                    test: /\.html$/,
-                    exclude: /node_modules/,
-                    use: {
-                        loader: 'file-loader',
-                        query: {
-                            name: '[name].[ext]'
-                        },
-                    },
-                },
-                {
-                    test: /\.css$/,
-                    exclude: /node_modules/,
-                    use: [
-                        'style-loader',
-                        'css-loader'
-                    ]
-                },
-                {
-                    test: /\.(js|jsx)$/,
-                    exclude: /node_modules/,
-                    use: [
-                        'babel-loader'
-                    ],
-                },
-            ],
+            rules: loaders,
         },
         resolve: {
             extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
@@ -115,7 +91,7 @@ module.exports = function (env) {
         devServer: {
             contentBase: './client',
             historyApiFallback: true,
-            port: 3000,
+            port: 4000,
             compress: isProd,
             inline: !isProd,
             hot: !isProd,
