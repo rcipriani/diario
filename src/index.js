@@ -1,17 +1,56 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import 'babel-polyfill';
+import logger from './app/dev/logger';
 
-import 'index.html';
+import rootReducer from 'reducers';
+import Routes from './app/routes';
+import DevTools from './app/dev/redux-dev-tools';
 
+// Load SCSS
+import './scss/app.scss';
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Creating store
+let store = null;
+
+if (isProduction) {
+  // In production adding only thunk middleware
+  const middleware = applyMiddleware(thunk);
+
+  store = createStore(
+    rootReducer,
+    middleware
+  );
+} else {
+  // In development mode beside thunk
+  // logger and DevTools are added
+  const middleware = applyMiddleware(thunk, logger);
+  const enhancer = compose(
+    middleware,
+    DevTools.instrument()
+  );
+
+  store = createStore(
+    rootReducer,
+    enhancer
+  );
+}
+
+
+// Render it to DOM
 ReactDOM.render(
-    <div>
-        <input defaultValue="oi"/>
-        <div>Teste 1</div>
-        <div>Teste 2</div>
-    </div>,
-    document.getElementById('root')
+  <Provider store={ store }>
+    { isProduction ?
+      <Routes /> :
+      <div>
+        <Routes />
+        <DevTools />
+      </div> }
+  </Provider>,
+  document.getElementById('root')
 );
-// React.renderComponent(
-//     <h1>John Doe</h1>,
-//     document.getElementById('root')
-// );
