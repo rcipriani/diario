@@ -1,4 +1,5 @@
-diario
+Diário
 ======
 
 Tarefas diárias
+
