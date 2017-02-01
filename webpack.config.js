@@ -9,6 +9,8 @@ const autoprefixer = require('autoprefixer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
+const port = 80;
+
 const appSourcePath = path.join(__dirname, './src/app');
 const buildPath = path.join(__dirname, './dist');
 const imgPath = path.join(__dirname, './src/assets/img');
@@ -164,7 +166,7 @@ module.exports = {
     devServer: {
         contentBase: isProduction ? './build' : './source',
         historyApiFallback: true,
-        port: 3000,
+        port: port,
         compress: isProduction,
         inline: !isProduction,
         hot: !isProduction,

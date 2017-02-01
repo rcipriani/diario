@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import 'babel-polyfill';
-import logger from './app/dev/logger';
+import logger from './dev/logger';
 
 import rootReducer from 'reducers';
 import Routes from './app/routes';
-import DevTools from './app/dev/redux-dev-tools';
+import DevTools from './dev/redux-dev-tools';
 
 // Load SCSS
 import './scss/app.scss';
