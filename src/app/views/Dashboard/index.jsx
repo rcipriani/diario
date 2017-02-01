@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { testAction, testAsync } from 'actions/app';
+
 import bookImg from '../../../assets/img/book2.jpg';
 
 @connect(state => ({
